@@ -14,16 +14,23 @@
 
 
 set -x #run script in debug mode
-set -e #
+set -e # it exit the script when there is error
 set -o pipefail
 
 
 # list s3 buckets
+echo "print list of s3 buckets"
 aws s3 ls
 
+
 # List ec2 instances
+echo "print list of ec2 instances"
 aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
 
-# List IAM Users
-aws iam list-users
+# List Lambda
+echo "print list of lambda functions"
+aws lambda list-functions
 
+# List IAM Users
+echo "print list of iam users"
+aws iam list-users
